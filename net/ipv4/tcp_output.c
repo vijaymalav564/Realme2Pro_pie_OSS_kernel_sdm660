@@ -2088,7 +2088,7 @@ static bool tcp_small_queue_check(struct sock *sk, const struct sk_buff *skb,
 {
 	unsigned int limit;
 
-	limit = max(2 * skb->truesize, sk->sk_pacing_rate >> sk->sk_pacing_shift);
+	limit = max(2 * skb->truesize, sk->sk_pacing_rate >> 10);
 	limit = min_t(u32, limit, sysctl_tcp_limit_output_bytes);
 	limit <<= factor;
 
@@ -2888,6 +2888,9 @@ begin_fwd:
 
 		if (sacked & (TCPCB_SACKED_ACKED|TCPCB_SACKED_RETRANS))
 			continue;
+
+		if (tcp_small_queue_check(sk, skb, 1))
+			return;
 
 		if (tcp_retransmit_skb(sk, skb, segs))
 			return;
