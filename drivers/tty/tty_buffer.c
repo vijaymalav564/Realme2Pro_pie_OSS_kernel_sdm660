@@ -133,7 +133,7 @@ void tty_buffer_free_all(struct tty_port *port)
 
 	atomic_set(&buf->mem_used, 0);
 	if (!IS_ERR_OR_NULL(port->worker_thread))
-		kthread_stop(port->worker_thread);
+	kthread_stop(port->worker_thread);
 }
 
 /**
