@@ -370,7 +370,7 @@ int msm_cam_clk_enable(struct device *dev, struct msm_cam_clk_info *clk_info,
 				clk_disable(clk_ptr[i]);
 				clk_unprepare(clk_ptr[i]);
 				clk_put(clk_ptr[i]);
-                                clk_ptr[i] = NULL;
+				clk_ptr[i] = NULL;
 			}
 		}
 	}
