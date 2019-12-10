@@ -1919,7 +1919,7 @@ sd_spinup_disk(struct scsi_disk *sdkp)
 			 * doesn't have any media in it, don't bother
 			 * with any more polling.
 			 */
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Ji.Xu@BSP.CHG.Basic, 2018/11/13, xj Modify for OTG */
 			if (retries > 25) {
 				if (media_not_present(sdkp, &sshdr))
@@ -1932,7 +1932,7 @@ sd_spinup_disk(struct scsi_disk *sdkp)
 			if (the_result)
 				sense_valid = scsi_sense_valid(&sshdr);
 			retries++;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Ji.Xu@BSP.CHG.Basic, 2018/11/13, xj Modify for OTG */
 		} while (retries < 30 &&
 

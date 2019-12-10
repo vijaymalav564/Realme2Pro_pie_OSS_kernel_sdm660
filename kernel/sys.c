@@ -65,7 +65,7 @@
 #include <asm/io.h>
 #include <asm/unistd.h>
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_OPPO_HEALTHINFO)
+#if defined(CONFIG_VENDOR_REALME) && defined(CONFIG_OPPO_HEALTHINFO)
 // jiheng.xie@PSW.TECH.KERNEL, 2018/12/28
 // Add for rlimit info
 #include <soc/oppo/oppo_healthinfo.h>
@@ -1367,7 +1367,7 @@ static void rlim64_to_rlim(const struct rlimit64 *rlim64, struct rlimit *rlim)
 		rlim->rlim_max = (unsigned long)rlim64->rlim_max;
 }
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_OPPO_HEALTHINFO)
+#if defined(CONFIG_VENDOR_REALME) && defined(CONFIG_OPPO_HEALTHINFO)
 // jiheng.xie@PSW.TECH.KERNEL, 2018/12/28
 // Add for rlimit info
 extern bool ohm_rlimit_logon;
@@ -1382,7 +1382,7 @@ int do_prlimit(struct task_struct *tsk, unsigned int resource,
 	struct rlimit *rlim;
 	int retval = 0;
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_OPPO_HEALTHINFO)
+#if defined(CONFIG_VENDOR_REALME) && defined(CONFIG_OPPO_HEALTHINFO)
 // jiheng.xie@PSW.TECH.KERNEL, 2018/12/28
 // Add for rlimit info
 	int rt_changed = 0;
@@ -1431,7 +1431,7 @@ int do_prlimit(struct task_struct *tsk, unsigned int resource,
 		if (old_rlim)
 			*old_rlim = *rlim;
 		if (new_rlim){
-#if defined(VENDOR_EDIT) && defined(CONFIG_OPPO_HEALTHINFO)
+#if defined(CONFIG_VENDOR_REALME) && defined(CONFIG_OPPO_HEALTHINFO)
 // jiheng.xie@PSW.TECH.KERNEL, 2018/12/28
 // Add for rlimit info
 			rt_changed = 1;
@@ -1440,7 +1440,7 @@ int do_prlimit(struct task_struct *tsk, unsigned int resource,
 			}
 	}
 	task_unlock(tsk->group_leader);
-#if defined(VENDOR_EDIT) && defined(CONFIG_OPPO_HEALTHINFO)
+#if defined(CONFIG_VENDOR_REALME) && defined(CONFIG_OPPO_HEALTHINFO)
 // jiheng.xie@PSW.TECH.KERNEL, 2018/12/28
 // Add for rlimit info
 		if ((is_compat_task()) && (rt_changed) && (resource == RLIMIT_STACK) && (record_stack_limit < rlim->rlim_cur)) {

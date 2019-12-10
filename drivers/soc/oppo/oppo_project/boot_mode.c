@@ -104,7 +104,7 @@ static struct attribute_group attr_group = {
 	.attrs = g,
 };
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* OPPO 2013-09-03 heiwei add for add interface start reason and boot_mode begin */
 char pwron_event[MAX_CMD_LENGTH];
 static int __init start_reason_init(void)
@@ -127,7 +127,7 @@ static int __init start_reason_init(void)
 
 char boot_mode[MAX_CMD_LENGTH];
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Fuchun.Liao@Mobile.BSP.CHG 2016-01-14 add for charge
 bool qpnp_is_power_off_charging(void)
 {
@@ -138,7 +138,7 @@ bool qpnp_is_power_off_charging(void)
 		return false;
 }
 #endif
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //PengNan@SW.BSP add for detect charger when reboot 2016-04-22
 char charger_reboot[MAX_CMD_LENGTH];
 bool qpnp_is_charger_reboot(void)
@@ -164,7 +164,7 @@ static int __init oppo_charger_reboot(void)
     printk(KERN_INFO "%s: parse charger_reboot %s\n", __func__, charger_reboot);
 	return 1;
 }
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 
 int __init  board_boot_mode_init(void)
@@ -195,18 +195,18 @@ static int __init boot_mode_init(void)
 	
 	board_boot_mode_init();
 	
-#ifdef VENDOR_EDIT		
+#ifdef CONFIG_VENDOR_REALME		
 	/* OPPO 2013.07.09 hewei add begin for factory mode*/
 	board_mfg_mode_init();
 	/* OPPO 2013.07.09 hewei add end */
-#endif //VENDOR_EDIT
+#endif //CONFIG_VENDOR_REALME
 
 /* OPPO 2013-09-03 heiwei add for add interface start reason and boot_mode begin */
     start_reason_init();
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //PengNan@SW.BSP add for detect charger when reboot 2016-04-22
 	oppo_charger_reboot();
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 /* OPPO 2013-09-03 zhanglong add for add interface start reason and boot_mode end */
 	/* OPPO 2013.07.09 hewei add begin for factory mode*/
@@ -220,7 +220,7 @@ static int __init boot_mode_init(void)
 }
 //__setup("androidboot.mode=", boot_mode_setup);
 /* OPPO 2013-09-03 zhanglong add for add interface start reason and boot_mode end */
-#endif //VENDOR_EDIT
+#endif //CONFIG_VENDOR_REALME
 
 //module_init(boot_mode_init);
 arch_initcall(boot_mode_init);

@@ -98,7 +98,7 @@ void ion_reserve(struct ion_platform_data *data);
 struct ion_client *ion_client_create(struct ion_device *dev,
 				     const char *name);
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //fangpan@Swdp.shanghai, 2016/02/02, add ion memory status interface
 /**
  *ion_system_heap_cached_memory() -  get the system heap free memory
@@ -241,7 +241,7 @@ static inline struct ion_client *ion_client_create(
 	return ERR_PTR(-ENODEV);
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //fangpan@Swdp.shanghai, 2016/02/02, add ion memory status interface
 /**
  *ion_system_heap_cached_memory() -  get the system heap free memory

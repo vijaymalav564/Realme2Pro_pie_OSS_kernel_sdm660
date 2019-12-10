@@ -47,7 +47,7 @@ static cputime64_t get_iowait_time(int cpu)
 
 static u64 get_idle_time(int cpu)
 {
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	// liangkun@Swdp.shanghai 2015/11/03 modify to get valid stat
 	return kcpustat_cpu(cpu).cpustat[CPUTIME_IDLE];
 	#else
@@ -68,7 +68,7 @@ static u64 get_idle_time(int cpu)
 
 static u64 get_iowait_time(int cpu)
 {
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	// liangkun@Swdp.shanghai 2015/11/03 modify to get valid stat
 	return kcpustat_cpu(cpu).cpustat[CPUTIME_IOWAIT];
 	#else
@@ -142,7 +142,7 @@ static int show_stat(struct seq_file *p, void *v)
 	seq_put_decimal_ull(p, ' ', cputime64_to_clock_t(guest_nice));
 	seq_putc(p, '\n');
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	// liangkun@Swdp.shanghai 2015/11/03 modify to get all cpus stat
 	for_each_present_cpu(i) {
 	#else

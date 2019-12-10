@@ -39,10 +39,10 @@
 #include <linux/of.h>
 #include <linux/of_device.h>
 #include <linux/wait.h>
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Fuchun.Liao@BSP.CHG.Basic 2017/03/11 add for console
 #include <soc/oppo/boot_mode.h>
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */
 
 #define UART_MR1			0x0000
 
@@ -160,11 +160,11 @@
 #define UARTDM_NCF_TX			0x40
 #define UARTDM_RX_TOTAL_SNAP		0x38
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Tong.han@BSP.Group.Tp, 2017/05/02, antong Add for debug console reg issue 969323*/
 #define UARTDM_TXFS			0x4c
 #define UARTDM_RXFS			0x50
-#endif/*VENDOR_EDIT*/
+#endif/*CONFIG_VENDOR_REALME*/
 
 #define UARTDM_BURST_SIZE		16   /* in bytes */
 #define UARTDM_TX_AIGN(x)		((x) & ~0x3) /* valid for > 1p3 */
@@ -201,10 +201,10 @@ struct msm_port {
 	bool			break_detected;
 	struct msm_dma		tx_dma;
 	struct msm_dma		rx_dma;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Tong.han@BSP.Group.Tp, 2017/05/02, antong Add for debug console reg issue 969323*/
 	int			tx_timeout;
-#endif/*VENDOR_EDIT*/
+#endif/*CONFIG_VENDOR_REALME*/
 };
 
 #define UART_TO_MSM(uart_port)	container_of(uart_port, struct msm_port, uart)

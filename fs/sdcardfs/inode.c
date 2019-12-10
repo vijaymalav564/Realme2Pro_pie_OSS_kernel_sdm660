@@ -554,10 +554,10 @@ static int sdcardfs_permission(struct vfsmount *mnt, struct inode *inode, int ma
 	int err;
 	struct inode tmp;
 	struct sdcardfs_inode_data *top = top_data_get(SDCARDFS_I(inode));
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 	kgid_t media_gid = make_kgid(&init_user_ns, AID_MEDIA_RW);
 	struct sdcardfs_sb_info *sbi = SDCARDFS_SB(inode->i_sb);
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */
 
 	if (IS_ERR(mnt))
 		return PTR_ERR(mnt);
@@ -580,11 +580,11 @@ static int sdcardfs_permission(struct vfsmount *mnt, struct inode *inode, int ma
 	tmp.i_gid = make_kgid(&init_user_ns, get_gid(mnt, inode->i_sb, top));
 	tmp.i_mode = (inode->i_mode & S_IFMT)
 			| get_mode(mnt, SDCARDFS_I(inode), top);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 	if (!sbi->options.multiuser && in_group_p(media_gid) && (mask & MAY_WRITE)) {
 		tmp.i_mode |= (MAY_WRITE << 3);
 	}
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */
 	data_put(top);
 	tmp.i_sb = inode->i_sb;
 	if (IS_POSIXACL(inode))

@@ -52,12 +52,12 @@ struct cluster_data {
 	unsigned int first_cpu;
 	unsigned int boost;
 	struct kobject kobj;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Hui.Fan@BSP.Kernel.Driver, 2017-2-10, hypnus;
  * provide interface to disable core_ctl dynamicly
  */
 	bool disabled;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 };
 
 struct cpu_data {
@@ -331,14 +331,14 @@ static ssize_t show_global_state(const struct cluster_data *state, char *buf)
 						cluster->nr_isolated_cpus);
 		count += snprintf(buf + count, PAGE_SIZE - count,
 				"\tBoost: %u\n", (unsigned int) cluster->boost);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Hui.Fan@BSP.Kernel.Driver, 2017-2-10, hypnus;
  * provide interface to disable core_ctl dynamicly
  */
 		count += snprintf(buf + count, PAGE_SIZE - count,
 				"\tStatus: %s\n",
 				cluster->disabled ? "disabled" : "enabled");
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 	}
 	spin_unlock_irq(&state_lock);
 
@@ -386,7 +386,7 @@ static ssize_t show_not_preferred(const struct cluster_data *state, char *buf)
 	return count;
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Hui.Fan@BSP.Kernel.Driver, 2017-2-10, hypnus;
  * provide interface to disable core_ctl dynamicly
  */
@@ -415,7 +415,7 @@ static ssize_t show_disable(const struct cluster_data *state, char *buf)
 {
 	return snprintf(buf, PAGE_SIZE, "%u\n", state->disabled);
 }
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 struct core_ctl_attr {
 	struct attribute attr;
@@ -443,12 +443,12 @@ core_ctl_attr_ro(active_cpus);
 core_ctl_attr_ro(global_state);
 core_ctl_attr_rw(not_preferred);
 core_ctl_attr_rw(enable);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Hui.Fan@BSP.Kernel.Driver, 2017-2-10, hypnus;
  * provide interface to disable core_ctl dynamicly
  */
 core_ctl_attr_rw(disable);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 static struct attribute *default_attrs[] = {
 	&min_cpus.attr,
@@ -463,12 +463,12 @@ static struct attribute *default_attrs[] = {
 	&active_cpus.attr,
 	&global_state.attr,
 	&not_preferred.attr,
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Hui.Fan@BSP.Kernel.Driver, 2017-2-10, hypnus;
  * provide interface to disable core_ctl dynamicly
  */
 	&disable.attr,
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 	NULL
 };
 
@@ -701,13 +701,13 @@ static void wake_up_core_ctl_thread(struct cluster_data *cluster)
 {
 	unsigned long flags;
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Hui.Fan@BSP.Kernel.Driver, 2017-2-10, hypnus;
  * provide interface to disable core_ctl dynamicly
  */
 	if(unlikely(cluster->disabled))
 		return;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 	spin_lock_irqsave(&cluster->pending_lock, flags);
 	cluster->pending = true;

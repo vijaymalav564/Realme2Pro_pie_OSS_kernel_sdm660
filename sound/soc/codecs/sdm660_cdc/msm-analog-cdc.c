@@ -486,12 +486,12 @@ static int msm_anlg_cdc_mbhc_map_btn_code_to_num(struct snd_soc_codec *codec)
 		break;
 	};
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	/* Jianfeng.Qiu@PSW.MM.AudioDriver.Codec, 2017/04/07,
 	 * Add for headset button log.
 	 */
 	pr_info("%s: btn is %d", __func__, btn);
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 
 	return btn;
 }
@@ -1622,7 +1622,7 @@ static int msm_anlg_cdc_loopback_mode_put(struct snd_kcontrol *kcontrol,
 	return 0;
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*Zhaoan.Xu@PSW.MM.AudioDriver.FTM, 2016/08/24,
  *Add for AT command to enable micbias.
  */
@@ -1680,7 +1680,7 @@ static int micbias_put(struct snd_kcontrol *kcontrol,
 
 	return 0;
 }
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */
 static int msm_anlg_cdc_pa_gain_get(struct snd_kcontrol *kcontrol,
 				    struct snd_ctl_elem_value *ucontrol)
 {
@@ -1976,7 +1976,7 @@ static int msm_anlg_cdc_ext_spk_boost_set(struct snd_kcontrol *kcontrol,
 }
 
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*Zhaoan.Xu@PSW.MM.AudioDriver.FTM, 2016/08/24,
  *Add for AT command to enable micbias.
  */
@@ -1985,7 +1985,7 @@ static char const *msm_anlg_cdc_micbias_ctrl_text[] = {
 static const struct soc_enum msm_anlg_cdc_micbias_ctl_enum[] = {
 		SOC_ENUM_SINGLE_EXT(3, msm_anlg_cdc_micbias_ctrl_text),
 };
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */
 static const char * const msm_anlg_cdc_loopback_mode_ctrl_text[] = {
 		"DISABLE", "ENABLE"};
 static const struct soc_enum msm_anlg_cdc_loopback_mode_ctl_enum[] = {
@@ -2034,7 +2034,7 @@ static const char * const cf_text[] = {
 	"MIN_3DB_4Hz", "MIN_3DB_75Hz", "MIN_3DB_150Hz"
 };
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*Jianfeng.Qiu@PSW.MM.AudioDriver.Codec, 2017/05/12,
  *Add for set mode for pm660l_bob regulator.
  */
@@ -2112,23 +2112,23 @@ static int regulator_mode_switch_set(struct snd_kcontrol *kcontrol,
 
 	return 0;
 }
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */
 static const struct snd_kcontrol_new msm_anlg_cdc_snd_controls[] = {
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	/*Zhaoan.Xu@PSW.MM.AudioDriver.FTM, 2016/08/24,
 	 *Add for AT command to enable micbias.
 	 */
 	SOC_ENUM_EXT("Enable Micbias", msm_anlg_cdc_micbias_ctl_enum[0],
 		micbias_get, micbias_put),
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	/*Jianfeng.Qiu@PSW.MM.AudioDriver.Codec, 2017/05/12,
 	 *Add for set mode for pm660l_bob regulator.
 	 */
 	SOC_ENUM_EXT("Regulator Mode Switch", pm660l_bob_ctl_enum[0],
 		regulator_mode_switch_get, regulator_mode_switch_set),
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 
 	SOC_ENUM_EXT("RX HPH Mode", msm_anlg_cdc_hph_mode_ctl_enum[0],
 		msm_anlg_cdc_hph_mode_get, msm_anlg_cdc_hph_mode_set),
@@ -4329,12 +4329,12 @@ static int msm_anlg_cdc_soc_probe(struct snd_soc_codec *codec)
 	sdm660_cdc->boost_option = BOOST_SWITCH;
 	sdm660_cdc->hph_mode = NORMAL_MODE;
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	/*Jianfeng.Qiu@PSW.MM.AudioDriver.Codec, 2017/05/12,
 	 *Add for set mode for pm660l_bob regulator.
 	 */
 	sdm660_cdc->bob_mode = REGULATOR_MODE_NORMAL;
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 	msm_anlg_cdc_dt_parse_boost_info(codec);
 	msm_anlg_cdc_set_boost_v(codec);
 
@@ -4776,10 +4776,10 @@ static int msm_anlg_cdc_probe(struct platform_device *pdev)
 				     GFP_KERNEL);
 	if (sdm660_cdc == NULL) {
 		ret = -ENOMEM;
-		#ifdef VENDOR_EDIT
+		#ifdef CONFIG_VENDOR_REALME
 		/* Jianfeng.Qiu@PSW.MM.AudioDriver.Machine,2017/09/21, Add for log*/
 		pr_err("%s: *** -ENOMEM\n", __func__);
-		#endif /* VENDOR_EDIT */
+		#endif /* CONFIG_VENDOR_REALME */
 		goto rtn;
 	}
 

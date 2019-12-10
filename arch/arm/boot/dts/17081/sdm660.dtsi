@@ -307,11 +307,11 @@
 					dev = "/dev/block/platform/soc/c0c4000.sdhci/by-name/vendor";
 					type = "ext4";
 					mnt_flags = "ro,barrier=1,discard";
-//#ifndef VENDOR_EDIT //Fanhong.Kong@PSW.BSP.CHG,add 2017/10/25 for close AB 
+//#ifndef CONFIG_VENDOR_REALME //Fanhong.Kong@PSW.BSP.CHG,add 2017/10/25 for close AB 
 //					fsmgr_flags = "wait,slotselect,verify";
-//#else/*VENDOR_EDIT*/
+//#else/*CONFIG_VENDOR_REALME*/
 					fsmgr_flags = "wait,verify";
-//#endif/*VENDOR_EDIT*/
+//#endif/*CONFIG_VENDOR_REALME*/
 					status = "ok";
 				};
 			};
@@ -347,7 +347,7 @@
 			reg = <0x0 0x8ac00000 0x0 0x7e00000>;
 		};
 
-		//#ifndef VENDOR_EDIT
+		//#ifndef CONFIG_VENDOR_REALME
 		/*xiang.fei@PSW.MM.AudioDriver.ADSP, 2017/03/02, Modify for adsp image*/
 		/*
 		adsp_fw_mem: adsp_fw_region@92a00000 {
@@ -356,15 +356,15 @@
 			reg = <0x0 0x92a00000 0x0 0x1e00000>;
 		};
 		*/
-		//#else /* VENDOR_EDIT */
+		//#else /* CONFIG_VENDOR_REALME */
 		adsp_fw_mem: adsp_fw_region@92a00000 {
 			compatible = "removed-dma-pool";
 			no-map;
 			reg = <0x0 0x92a00000 0x0 0x2000000>; //increase 2M, 30M -> 32M
 		};
-		//#endif /* VENDOR_EDIT */
+		//#endif /* CONFIG_VENDOR_REALME */
 
-		//#ifndef VENDOR_EDIT
+		//#ifndef CONFIG_VENDOR_REALME
 		/*xiang.fei@PSW.MM.AudioDriver.ADSP, 2017/03/02, Modify for pil image*/
 		/*
 		pil_mba_mem: pil_mba_region@94800000 {
@@ -373,15 +373,15 @@
 			reg = <0x0 0x94800000 0x0 0x200000>;
 		};
 		*/
-		//#else /* VENDOR_EDIT */
+		//#else /* CONFIG_VENDOR_REALME */
 		pil_mba_mem: pil_mba_region@94a00000 {
 			compatible = "removed-dma-pool";
 			no-map;
 			reg = <0x0 0x94a00000 0x0 0x200000>; //pil start address +2M
 		};
-		//#endif /* VENDOR_EDIT */
+		//#endif /* CONFIG_VENDOR_REALME */
 
-		//#ifndef VENDOR_EDIT
+		//#ifndef CONFIG_VENDOR_REALME
 		/*xiang.fei@PSW.MM.AudioDriver.ADSP, 2017/03/02, Modify for cdsp image*/
 		/*
 		cdsp_fw_mem: cdsp_fw_region@94a00000 {
@@ -390,13 +390,13 @@
 			reg = <0x0 0x94a00000 0x0 0x600000>;
 		};
 		*/
-		//#else /* VENDOR_EDIT */
+		//#else /* CONFIG_VENDOR_REALME */
 		cdsp_fw_mem: cdsp_fw_region@94c00000 {
 			compatible = "removed-dma-pool";
 			no-map;
 			reg = <0x0 0x94c00000 0x0 0x600000>; //cdsp start address +2M
 		};
-		//#endif /* VENDOR_EDIT */
+		//#endif /* CONFIG_VENDOR_REALME */
 
 		venus_fw_mem: venus_fw_region {
 			compatible = "shared-dma-pool";
@@ -646,7 +646,7 @@
 		reg = <0x17817000 0x1000>;
 		reg-names = "wdt-base";
 		interrupts = <0 3 0>, <0 4 0>;
-		//#ifdef VENDOR_EDIT //yixue.ge modify bark time to 20s
+		//#ifdef CONFIG_VENDOR_REALME //yixue.ge modify bark time to 20s
 		//qcom,bark-time = <11000>;
 		//#else
 		qcom,bark-time = <20000>;
@@ -713,7 +713,7 @@
 		clock-names = "core", "iface";
 	};
 
-/*#ifndef VENDOR_EDIT */
+/*#ifndef CONFIG_VENDOR_REALME */
 /* Ziqing.Guo@BSP.Fingerprint.Basic 2017/11/23, Remove for don't need qcom fingerprint sensor*/
 /*
 	qcom,qbt1000 {
@@ -910,7 +910,7 @@
 		reg = <0x1fe5040 0x28>;
 	};
 
-//#ifndef VENDOR_EDIT /* Jianchao.Shi@BSP.CHG.Basic, 2017/02/14, sjc Delete for charging */
+//#ifndef CONFIG_VENDOR_REALME /* Jianchao.Shi@BSP.CHG.Basic, 2017/02/14, sjc Delete for charging */
 /*
 	qcom,bcl {
 		compatible = "qcom,bcl";
@@ -1610,7 +1610,7 @@
 		qcom,client-id = <0x00000001>;
 	};
 
-    //#ifdef VENDOR_EDIT
+    //#ifdef CONFIG_VENDOR_REALME
     //Zhengpeng.Tan@NW.AP.NV.892767, 2016/11/30
     //#ifdef FEATURE_OPPO_NV_BACKUP
     //add for creating a shared memory with uio for nv backup and restore
@@ -1621,7 +1621,7 @@
         qcom,client-id = <0x00000004>;
     };
     //#endif /* FEATURE_OPPO_NV_BACKUP */
-    //#endif /* VENDOR_EDIT */
+    //#endif /* CONFIG_VENDOR_REALME */
 
 	qcom,rmnet-ipa {
 		compatible = "qcom,rmnet-ipa";
@@ -2668,7 +2668,7 @@
 #include "msm-audio.dtsi"
 #include "sdm660-audio.dtsi"
 
-//#ifndef VENDOR_EDIT
+//#ifndef CONFIG_VENDOR_REALME
 //rendong.shi@Bsp.boot.devices,2016/12/21,Added for vol_down & vol_up
 &pm660l_gpios {
 	/* GPIO 7 for VOL_UP */
@@ -2716,7 +2716,7 @@
 		status = "okay";
 		compatible = "gpio-keys";
 		input-name = "gpio-keys";
-//#ifndef VENDOR_EDIT
+//#ifndef CONFIG_VENDOR_REALME
 //rendong.shi@Bsp.boot.devices,2016/12/21,Added for vol_down & vol_up
 /*		pinctrl-names = "tlmm_gpio_key_active","tlmm_gpio_key_suspend";
 		pinctrl-0 = <&gpio_key_active>;

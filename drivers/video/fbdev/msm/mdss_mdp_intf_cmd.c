@@ -22,11 +22,11 @@
 #include "mdss_mdp_trace.h"
 #include "mdss_dsi_clk.h"
 #include <linux/interrupt.h>
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Guoqiang.Jiang@PSW.MM.Display.LCD.Stability, 2018/10/13,
 //add for display key log
 #include <soc/oppo/mmkey_log.h>
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 #define MAX_RECOVERY_TRIALS 10
 #define MAX_SESSIONS 2
@@ -2804,7 +2804,7 @@ static void mdss_mdp_cmd_wait4_autorefresh_done(struct mdss_mdp_ctl *ctl)
 	MDSS_XLOG(val, 0x333);
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Driver.feature, 2018/08/17,
  *add for layer sync
 */
@@ -2842,7 +2842,7 @@ void oppo_wait_for_frame_start(struct mdss_mdp_ctl *ctl)
 	/* disable rd_ptr interrupt */
 	mdss_mdp_setup_vsync(ctx, false);
 }
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 /* caller needs to hold autorefresh_lock before calling this function */
 static int mdss_mdp_disable_autorefresh(struct mdss_mdp_ctl *ctl,
@@ -3542,11 +3542,11 @@ panel_events:
 	ctl->ops.reconfigure = NULL;
 	ctl->ops.wait_for_vsync_fnc = NULL;
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Feature, 2018/01/03,
 //add for dynamic mipi dsi clk
 	ctl->ops.config_dsitiming_fnc = NULL;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 end:
 	if (!IS_ERR_VALUE(ret)) {
@@ -3732,14 +3732,14 @@ static int mdss_mdp_cmd_intfs_setup(struct mdss_mdp_ctl *ctl,
 		} else {
 			pr_err("Intf %d already in use\n", session);
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Guoqiang.Jiang@PSW.MM.Display.LCD.Feature, 2018/10/13,
 //add for blank
 			pr_err("Intf %d recovery, ctx ref_cnt: %d, panel state: %d\n",
 					session,ctx->ref_cnt,ctx->panel_power_state);
 			ctx->ref_cnt = 0;
 			mdss_fb_report_panel_dead(ctl->mfd);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 			return -EBUSY;
 		}
@@ -3886,7 +3886,7 @@ void mdss_mdp_switch_to_vid_mode(struct mdss_mdp_ctl *ctl, int prep)
 			(void *) mode, CTL_INTF_EVENT_FLAG_DEFAULT);
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Feature, 2018/01/03,
 //add for dynamic mipi dsi clk
 static int mdss_mdp_cmd_config_dsitiming(struct mdss_mdp_ctl *ctl,
@@ -3917,7 +3917,7 @@ static int mdss_mdp_cmd_config_dsitiming(struct mdss_mdp_ctl *ctl,
 			__func__, ctl->intf_num, rc);
 	return rc;
 }
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 static int mdss_mdp_cmd_reconfigure(struct mdss_mdp_ctl *ctl,
 		enum dynamic_switch_modes mode, bool prep)
@@ -4012,11 +4012,11 @@ int mdss_mdp_cmd_start(struct mdss_mdp_ctl *ctl)
 	ctl->ops.panel_disable_cfg = mdss_mdp_cmd_panel_disable_cfg;
 	ctl->ops.wait_for_vsync_fnc = mdss_mdp_cmd_wait4_vsync;
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Feature, 2018/01/03,
 //add for dynamic mipi dsi clk
 	ctl->ops.config_dsitiming_fnc = mdss_mdp_cmd_config_dsitiming;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 	pr_debug("%s:-\n", __func__);
 

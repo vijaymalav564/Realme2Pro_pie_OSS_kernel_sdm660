@@ -428,7 +428,7 @@ obj-$(CONFIG_SND_SOC_TPA6130A2)	+= snd-soc-tpa6130a2.o
 obj-y += sdm660_cdc/
 obj-y += msm_sdw/
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 #xiang.fei@PSW.MM.AudioDriver.SmartPA, 2017/01/13, Add for nxp speaker
 obj-y += tfa98xx/
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */

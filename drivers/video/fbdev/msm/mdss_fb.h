@@ -27,7 +27,7 @@
 #define MDSS_LPAE_CHECK(phys)	\
 	((sizeof(phys) > sizeof(unsigned long)) ? ((phys >> 32) & 0xFF) : (0))
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Gou shengjun@MultiMedia.Display.LCD.Stability, 2017/02/15,
 //add for 16051 read LCM window info
 #define PANEL_BLACK 0x01
@@ -382,10 +382,10 @@ struct msm_fb_data_type {
 	bool pending_switch;
 	struct mutex switch_lock;
 	struct input_handler *input_handler;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Display.LCD.Stability,2018/8/31,add for support fingerprint feature*/
 	bool oppo_commit_info;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 };
 
 static inline void mdss_fb_update_notify_update(struct msm_fb_data_type *mfd)

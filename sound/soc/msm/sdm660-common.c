@@ -195,14 +195,14 @@ static bool msm_swap_gnd_mic(struct snd_soc_codec *codec);
 static struct wcd_mbhc_config mbhc_cfg = {
 	.read_fw_bin = false,
 	.calibration = NULL,
-	#ifndef VENDOR_EDIT
+	#ifndef CONFIG_VENDOR_REALME
 	/* xiang.fei@PSW.MM.AudioDriver.HeadsetDet, 2017/04/10,
 	 * Modify for headset detect.
 	 */
 	.detect_extn_cable = true,
-	#else /* VENDOR_EDIT */
+	#else /* CONFIG_VENDOR_REALME */
 	.detect_extn_cable = false,
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 	.mono_stero_detection = false,
 	.swap_gnd_mic = NULL,
 	.hs_ext_micbias = true,
@@ -3040,10 +3040,10 @@ static int msm_asoc_machine_probe(struct platform_device *pdev)
 	int ret = -EINVAL, id;
 	const struct of_device_id *match;
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	/* Jianfeng.Qiu@PSW.MM.AudioDriver.Machine,2017/09/21, Add for log*/
 	pr_info("%s: *** Enter\n", __func__);
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 
 	pdata = devm_kzalloc(&pdev->dev,
 			     sizeof(struct msm_asoc_mach_data),
@@ -3159,10 +3159,10 @@ static int msm_asoc_machine_probe(struct platform_device *pdev)
 	if (pdata->snd_card_val != INT_SND_CARD)
 		msm_ext_register_audio_notifier(pdev);
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	/* Jianfeng.Qiu@PSW.MM.AudioDriver.Machine,2017/09/21, Add for log*/
 	pr_info("%s: sond card register success.\n", __func__);
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 
 	return 0;
 err:

@@ -56,7 +56,7 @@
 #include "mdss_smmu.h"
 #include "mdss_mdp.h"
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*
 * Guoqiang.jiang@MultiMedia.Display.LCD.Stability, 2018/10/12,
 * add for get panel serial number
@@ -82,7 +82,7 @@ static bool read_panel_serial_number = true;
 
 #define PANEL_SERIAL_NUM_REG	0xA1
 #define PANEL_REG_READ_LEN		16
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 #ifdef CONFIG_FB_MSM_TRIPLE_BUFFER
 #define MDSS_FB_NUM 3
 #else
@@ -119,12 +119,12 @@ static u32 mdss_fb_pseudo_palette[16] = {
 	0xffffffff, 0xffffffff, 0xffffffff, 0xffffffff
 };
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*Guoqiang.Jiang@PSW.MM.Display.LCD.Stability,2018/1/31,add for support aod feature, solve bug:1264744*/
 bool request_enter_aod = false;
 bool is_just_exit_aod = false;
 DEFINE_MUTEX(aod_lock);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 #ifdef IS_PROJECT_18321
 int system_backlight_target = 944;
@@ -879,7 +879,7 @@ static ssize_t mdss_fb_get_dfps_mode(struct device *dev,
 	return ret;
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Guoqiang.Jiang@PSW.MM.Driver.feature, 2017/10/10,
 //add for HBM
 int hbm_delay = 34000;
@@ -1048,9 +1048,9 @@ static ssize_t outdoorbl_store(struct device *dev,
 	}
 	return num;
 }
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Stability, 2017/01/24,
 //add for lcd esd test
 extern void set_esd_mode(int level);
@@ -1202,7 +1202,7 @@ static ssize_t mdss_set_closebl_flag(struct device *dev,
 	return count;
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*
  * Gou shegnjun@PSW.MM.Display.LCD.Stability,2018/01/22,
  * add for lcm id read
@@ -1343,7 +1343,7 @@ static ssize_t fingerprint_notify_trigger(struct device *dev,
 
 #endif /*VEDNOR_EDIT*/
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Deliang.Peng@PSW.MultiMedia.Display.Service.Log, 2017/3/31,
 //add for dump sf backtrace
 #define MDSS_DEBUG_SWT_TAG "SFWatchDog:"
@@ -1457,7 +1457,7 @@ static ssize_t mdss_set_debug_process(struct device *dev,
 }
 #endif /*VEDNOR_EDIT*/
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //LiPing@MultiMedia.Display.LCD.Stability, 2017/02/18,
 //add for lcd seed
 //YongPeng.Yi@MultiMedia.Display.LCD.Stability, 2017/03/06,
@@ -1498,7 +1498,7 @@ static DEVICE_ATTR(lcdoff, S_IRUGO, mdss_mdp_lcdoff_event, NULL);
 //add for lcd cabc
 static DEVICE_ATTR(cabc, S_IRUGO|S_IWUSR, mdss_get_cabc, mdss_set_cabc);
 static DEVICE_ATTR(closebl, 0664, mdss_get_closebl_flag, mdss_set_closebl_flag);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 
 static ssize_t mdss_fb_change_persist_mode(struct device *dev,
@@ -1593,7 +1593,7 @@ static DEVICE_ATTR(msm_fb_dfps_mode, S_IRUGO | S_IWUSR,
 	mdss_fb_get_dfps_mode, mdss_fb_change_dfps_mode);
 static DEVICE_ATTR(measured_fps, S_IRUGO | S_IWUSR | S_IWGRP,
 	mdss_fb_get_fps_info, NULL);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Gou shengjun@PSW.MM.Display.LCD.Stability, 2017/02/15,
 //add for 16051 read LCM window info
 static DEVICE_ATTR(lcm_id_info, S_IRUGO | S_IWUSR, lcm_get_id_info, lcm_set_id_addr);
@@ -1621,7 +1621,7 @@ static DEVICE_ATTR(fingerprint_notify, S_IRUGO|S_IWUSR, NULL, fingerprint_notify
 static DEVICE_ATTR(dynamic_fps_switch, S_IRUGO|S_IWUSR, dynamic_fps_switch_get, dynamic_fps_switch_set);
 #endif /*VEDNOR_EDIT*/
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Deliang.Peng@MultiMedia.Display.Service.Log, 2017/3/31,
 //add for dump sf backtrace
 static DEVICE_ATTR(debug, S_IRUGO|S_IWUSR, NULL, mdss_set_debug_process);
@@ -1644,7 +1644,7 @@ static struct attribute *mdss_fb_attrs[] = {
 	&dev_attr_msm_fb_dfps_mode.attr,
 	&dev_attr_measured_fps.attr,
 	&dev_attr_msm_fb_persist_mode.attr,
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //YongPeng.Yi@MultiMedia.Display.LCD.Stability, 2017/01/20,
 //add for adb mipi read/write lcd reg
 	&dev_attr_dump_reg.attr,
@@ -1678,7 +1678,7 @@ static struct attribute *mdss_fb_attrs[] = {
 */
 	&dev_attr_dynamic_fps_switch.attr,
 #endif /*VEDNOR_EDIT*/
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //LiPing@MultiMedia.Display.LCD.Stability, 2017/02/18,
 //add for lcd seed
 	&dev_attr_seed.attr,
@@ -2021,7 +2021,7 @@ static int mdss_fb_probe(struct platform_device *pdev)
 	mfd->mdp_fb_page_protection = MDP_FB_PAGE_PROTECTION_WRITECOMBINE;
 
 	mfd->ext_ad_ctrl = -1;
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_VENDOR_REALME
 //Guoqiang.Jiang@PSW.MM.Display.LCD.Stability, 2018/10/31,
 //modify for lcd happen esd set backlight 127 before set system backlight
 	if (mfd->panel_info && mfd->panel_info->brightness_max > 0)
@@ -2029,7 +2029,7 @@ static int mdss_fb_probe(struct platform_device *pdev)
 		mfd->panel_info->bl_max, mfd->panel_info->brightness_max);
 	else
 		mfd->bl_level = 0;
-#else /*VENDOR_EDIT*/
+#else /*CONFIG_VENDOR_REALME*/
 	if (mfd->panel_info && mfd->panel_info->brightness_max > 0){
 		MDSS_BRIGHT_TO_BL(mfd->bl_level, backlight_led.brightness,
 		mfd->panel_info->bl_max, mfd->panel_info->brightness_max);
@@ -2155,14 +2155,14 @@ static int mdss_fb_probe(struct platform_device *pdev)
 
 	INIT_DELAYED_WORK(&mfd->idle_notify_work, __mdss_fb_idle_notify_work);
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Stability, 2017/02/14,
 //add for silence and sau mode close bl flag
 	if((MSM_BOOT_MODE__SILENCE == get_boot_mode()) || (MSM_BOOT_MODE__SAU == get_boot_mode())){
 		pr_debug("lcd_closebl_flag = 1\n");
 		lcd_closebl_flag = 1;
 	}
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 	return rc;
 }
@@ -2280,11 +2280,11 @@ static int mdss_fb_suspend_sub(struct msm_fb_data_type *mfd)
 		 * on, but turn off all interface clocks.
 		 */
 		if (mdss_fb_is_power_on(mfd)) {
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Feature, 2018/01/03,
 //add for blank debug
 			pr_err("mdss_fb_blank_sub from PM, mode=%d\n",BLANK_FLAG_ULP);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 			ret = mdss_fb_blank_sub(BLANK_FLAG_ULP, mfd->fbi,
 					mfd->suspend.op_enable);
 			if (ret) {
@@ -2337,11 +2337,11 @@ static int mdss_fb_resume_sub(struct msm_fb_data_type *mfd)
 		int unblank_flag = mdss_panel_is_power_on_interactive(
 			mfd->suspend.panel_power_state) ? FB_BLANK_UNBLANK :
 			BLANK_FLAG_LP;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Feature, 2018/01/03,
 //add for blank debug
 		pr_info("mdss_fb_blank_sub from PM,mode=%d\n",unblank_flag);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 		ret = mdss_fb_blank_sub(unblank_flag, mfd->fbi, mfd->op_enable);
 		if (ret)
 			pr_warn("can't turn on display!\n");
@@ -2493,7 +2493,7 @@ void mdss_fb_set_backlight(struct msm_fb_data_type *mfd, u32 bkl_lvl)
 	bool bl_notify_needed = false;
 	pr_debug("mdss_fb_set_backlight = %d\n", bkl_lvl);
 
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Stability, 2017/02/14,
 //modify for Lcd ftm mode backlight
 	if ((((mdss_fb_is_power_off(mfd) && mfd->dcm_state != DCM_ENTER)
@@ -2506,7 +2506,7 @@ void mdss_fb_set_backlight(struct msm_fb_data_type *mfd, u32 bkl_lvl)
 	} else {
 		mfd->unset_bl_level = U32_MAX;
 	}
-#else /*VENDOR_EDIT*/
+#else /*CONFIG_VENDOR_REALME*/
 	boot_mode =get_boot_mode();
 	if(boot_mode == MSM_BOOT_MODE__FACTORY){
 			mfd->unset_bl_level = 0;
@@ -2557,7 +2557,7 @@ void mdss_fb_set_backlight(struct msm_fb_data_type *mfd, u32 bkl_lvl)
 			mdss_fb_bl_update_notify(mfd,
 				NOTIFY_TYPE_BL_UPDATE);
 	}
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 	/*
 	*  Guoqiang.Jiang@PSW.MM.Display.LCD.Stability, 2018/10/12,
 	*  read panel serial number at begining
@@ -2805,13 +2805,13 @@ static int mdss_fb_blank_unblank(struct msm_fb_data_type *mfd)
 error:
 	return ret;
 }
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Display.LCD.Stability, 2018/08/19,
 * add for AOD status sync.
 */
 bool fb_blank_sync_flag = false;
 bool oppo_aod_backlight_need_set = false;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 			     int op_enable)
 {
@@ -2833,7 +2833,7 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 		mfd->index, blank_mode);
 	ATRACE_BEGIN(trace_buffer);
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Stability, 2017/01/19,
 //add for panel debug
     pr_info("start mdss blank %d\n", blank_mode);
@@ -2866,14 +2866,14 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 	switch (blank_mode) {
 	case FB_BLANK_UNBLANK:
 		pr_debug("unblank called. cur pwr state=%d\n", cur_power_state);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*jie.hu@PSW.MM.Display.LCD.Stability,2018/1/31,add for support aod feature, solve bug:1264744*/
 		mutex_lock(&aod_lock);
 		request_enter_aod = false;
 		fb_blank_sync_flag = true;
 		oppo_aod_backlight_need_set = false;
 		mutex_unlock(&aod_lock);
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 		ret = mdss_fb_blank_unblank(mfd);
 		break;
 	case BLANK_FLAG_ULP:
@@ -2884,7 +2884,7 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 			return 0;
 		}
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Display.LCD.Stability,2018/1/31
 * add for send a fack panel off enent to tp and charge
 */
@@ -2897,7 +2897,7 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 			event.data = &blank_mode;
 			fb_notifier_call_chain(FB_EVENT_BLANK, &event);
 		}
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 		ret = mdss_fb_blank_blank(mfd, req_power_state);
 		break;
@@ -2911,7 +2911,7 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 		 */
 		if ((mdss_fb_is_power_off(mfd) && mfd->mdp.on_fnc) ||
 			(fb_blank_sync_flag && is_lcd(OPPO18005_SAMSUNG_AMS641RW01_1080P_CMD_PANEL))) {
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*jie.hu@PSW.MM.Display.LCD.Stability,2018/1/31,add for support aod feature, solve bug:1264744*/
 			mutex_lock(&aod_lock);
 			request_enter_aod = true;
@@ -2929,7 +2929,7 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 				event.data = &blank_mode;
 				fb_notifier_call_chain(FB_EVENT_BLANK, &event);
 			} else {
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 				pr_debug("off --> lp. switch to on first\n");
 				ret = mdss_fb_blank_unblank(mfd);
 				if (ret)
@@ -2938,12 +2938,12 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 		}
 
 		ret = mdss_fb_blank_blank(mfd, req_power_state);
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /*Gou shengjun@PSW.MM.Display.LCD.Stability,2018/1/31
 * add for send a fack panel off enent to tp and charge
 */
 		fb_blank_sync_flag = false;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 		break;
 	case FB_BLANK_HSYNC_SUSPEND:
 	case FB_BLANK_POWERDOWN:
@@ -2958,7 +2958,7 @@ static int mdss_fb_blank_sub(int blank_mode, struct fb_info *info,
 	/* Notify listeners */
 	sysfs_notify(&mfd->fbi->dev->kobj, NULL, "show_blank_event");
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 //Shengjun.Gou@PSW.MM.Display.LCD.Stability, 2017/01/19,
 //add for panel debug
 	pr_info("end mdss blank %d\n", blank_mode);
@@ -3463,12 +3463,12 @@ static int mdss_fb_register(struct msm_fb_data_type *mfd)
 	var->sync = 0,	/* see FB_SYNC_* */
 	var->rotate = 0,	/* angle we rotate counter clockwise */
 	mfd->op_enable = false;
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Driver.feature, 2018/08/17,
  *add for fingerprint hbm
 */
 	mfd->oppo_commit_info = false;
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 	switch (mfd->fb_imgType) {
 	case MDP_RGB_565:
@@ -3979,7 +3979,7 @@ static void mdss_fb_release_kickoff(struct msm_fb_data_type *mfd)
 	}
 }
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Driver.feature, 2018/08/17,
  *add for fingerprint hbm
 */
@@ -4004,7 +4004,7 @@ static int oppo_layer_interceptor(struct msm_fb_data_type *mfd, uint32_t layer_m
 	ATRACE_END(__func__);
 	return 0;
 }
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 /**
  * __mdss_fb_sync_buf_done_callback() - process async display events
@@ -4406,7 +4406,7 @@ int mdss_fb_atomic_commit(struct fb_info *info,
 	wake_up_all(&mfd->commit_wait_q);
 	mutex_unlock(&mfd->mdp_sync_pt_data.sync_mutex);
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Driver.feature, 2018/08/17,
  *add for fingerprint hbm
 */
@@ -4416,7 +4416,7 @@ int mdss_fb_atomic_commit(struct fb_info *info,
 		fingerprint_send_notify(info, 0x1, 1);
 		oppo_fp_notify_delay = false;
 	}
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 	if (wait_for_finish)
 		ret = mdss_fb_pan_idle(mfd);
@@ -5624,7 +5624,7 @@ static int mdss_fb_atomic_commit_ioctl(struct fb_info *info,
 		return 0;
 	}
 
-#ifdef VENDOR_EDIT
+#ifdef CONFIG_VENDOR_REALME
 /* Gou shengjun@PSW.MM.Driver.feature, 2018/08/17,
  *add for fingerprint hbm
 */
@@ -5635,7 +5635,7 @@ static int mdss_fb_atomic_commit_ioctl(struct fb_info *info,
 		oppo_layer_interceptor(mfd, commit.commit_v1.reserved[MDP_LAYER_COMMIT_V1_PAD-1]);
 		mutex_unlock(&layer_hbm_sync_mutex);
 	}
-#endif /*VENDOR_EDIT*/
+#endif /*CONFIG_VENDOR_REALME*/
 
 	output_layer_user = commit.commit_v1.output_layer;
 	if (output_layer_user) {

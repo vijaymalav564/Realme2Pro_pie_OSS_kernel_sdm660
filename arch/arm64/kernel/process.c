@@ -496,7 +496,7 @@ unsigned long arch_randomize_brk(struct mm_struct *mm)
 	return randomize_base(mm->brk);
 }
 
-#if defined(VENDOR_EDIT) && defined(CONFIG_ELSA_STUB)
+#if defined(CONFIG_VENDOR_REALME) && defined(CONFIG_ELSA_STUB)
 //zhoumingjun@Swdp.shanghai, 2017/04/19, add process_event_notifier support
 static BLOCKING_NOTIFIER_HEAD(process_event_notifier);
 

@@ -297,7 +297,7 @@ static void msm_restart_prepare(const char *cmd)
 		need_warm_reset = (get_dload_mode() ||
 				(cmd != NULL && cmd[0] != '\0'));
 	}
-#ifdef VENDOR_EDIT 
+#ifdef CONFIG_VENDOR_REALME 
 //Fanhong.Kong@PSW.BSP.CHG,add 2018/3/25 panic reboot reason for kernel 
 	if (in_panic){
 		//warm reset
@@ -312,7 +312,7 @@ static void msm_restart_prepare(const char *cmd)
 #endif
 		return;
 	}
-#endif /* VENDOR_EDIT */
+#endif /* CONFIG_VENDOR_REALME */
 	/* Hard reset the PMIC unless memory contents must be maintained. */
 	if (need_warm_reset) {
 		qpnp_pon_system_pwr_off(PON_POWER_OFF_WARM_RESET);
@@ -320,7 +320,7 @@ static void msm_restart_prepare(const char *cmd)
 		qpnp_pon_system_pwr_off(PON_POWER_OFF_HARD_RESET);
 	}
 
-#ifndef VENDOR_EDIT
+#ifndef CONFIG_VENDOR_REALME
 /* OPPO 2013.07.09 hewei modify begin for restart mode*/
 	if (cmd != NULL) {
 		if (!strncmp(cmd, "bootloader", 10)) {
@@ -377,7 +377,7 @@ static void msm_restart_prepare(const char *cmd)
 			__raw_writel(0x77665501, restart_reason);
 		}
 	}
-#else //VENDOR_EDIT
+#else //CONFIG_VENDOR_REALME
 	if (cmd != NULL) {
 		#ifndef DISABLE_FASTBOOT_CMDS //disable fastboot modem at release soft
 		if (!strncmp(cmd, "bootloader", 10)) {
@@ -470,7 +470,7 @@ static void msm_restart_prepare(const char *cmd)
 				PON_RESTART_REASON_NORMAL);
 	}
 /* OPPO 2013.07.09 hewei modify en for restart mode*/
-#endif //VENDOR_EDIT
+#endif //CONFIG_VENDOR_REALME
 	
 	flush_cache_all();
 
@@ -680,7 +680,7 @@ static int msm_restart_probe(struct platform_device *pdev)
 	struct device_node *np;
 	int ret = 0;
 
-	#ifdef VENDOR_EDIT
+	#ifdef CONFIG_VENDOR_REALME
 	/*ziqing.guo@BSP.Kernel.Stability, 2017/05/22, Modify for disable sdi only for the secure enabled device stage 2*/
 	#define OEM_SEC_ENABLE_ANTIROLLBACK_REG 0x78019c //this address just for sdm660
 	void __iomem *oem_config_base = ioremap(OEM_SEC_ENABLE_ANTIROLLBACK_REG, 4);
@@ -689,7 +689,7 @@ static int msm_restart_probe(struct platform_device *pdev)
 	if (secure_oem_config) {
 		pr_debug("this is a secure stage 2 device\n");
 	}
-	#endif /* VENDOR_EDIT */
+	#endif /* CONFIG_VENDOR_REALME */
 
 #ifdef CONFIG_QCOM_DLOAD_MODE
 	if (scm_is_call_available(SCM_SVC_BOOT, SCM_DLOAD_CMD) > 0)
