@@ -1702,7 +1702,7 @@ static int fastrpc_internal_invoke(struct fastrpc_file *fl, uint32_t mode,
 			goto bail;
 		}
 	}
-	
+
 	VERIFY(err, fl->sctx != NULL);
 	if (err)
 		goto bail;

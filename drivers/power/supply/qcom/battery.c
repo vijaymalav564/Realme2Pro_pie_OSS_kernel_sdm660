@@ -1,4 +1,4 @@
-/* Copyright (c) 2017 The Linux Foundation. All rights reserved.
+/* Copyright (c) 2017,2019 The Linux Foundation. All rights reserved.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 and
@@ -1407,7 +1407,6 @@ int qcom_batt_init(void)
 	}
 
 	vote(chip->pl_disable_votable, PL_INDIRECT_VOTER, true, 0);
-
 
 	rc = pl_register_notifier(chip);
 	if (rc < 0) {
