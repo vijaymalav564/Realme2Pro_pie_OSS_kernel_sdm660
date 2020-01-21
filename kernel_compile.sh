@@ -120,7 +120,7 @@ while true; do
 	if [ "$choice" == "4" ]; then
 		echo -e "\n#######################################################################"
         echo -e "\n(i) Cloning AnyKernel3 if folder not exist..."
-		git clone -b rmx1801 https://gitlab.com/Baibhab34/AnyKernel.git
+		git clone -b rmx1801 https://gitlab.com/Baibhab34/AnyKernel3.git
 		echo -e "\n(i) Strip and move modules to AnyKernel3..."
 
 		# thanks to @adekmaulana
