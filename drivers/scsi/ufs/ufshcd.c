@@ -9771,7 +9771,7 @@ out:
 	return count;
 }
 
-#ifdef CONFIG_VENDOR_REALME
+#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //cuixiaogang@SRC.hypnus.2018.04.02. add support for ufs clk scale
 int ufshcd_clk_scaling_enable(struct ufs_hba *hba, int val)
 {

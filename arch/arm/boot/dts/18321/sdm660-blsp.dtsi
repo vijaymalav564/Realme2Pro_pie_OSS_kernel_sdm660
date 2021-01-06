@@ -55,7 +55,7 @@
 		pinctrl-names = "i2c_active", "i2c_sleep";
 		pinctrl-0 = <&i2c_1_active>;
 		pinctrl-1 = <&i2c_1_sleep>;
-		//#ifdef CONFIG_VENDOR_REALME
+		//#ifdef CONFIG_PRODUCT_REALME_RMX1801
 		//Wanghao@BSP.group 2017-1-18 add for enable i2c_1
 		status = "okay";
 		//#endif
@@ -125,7 +125,7 @@
 		clock-names = "iface_clk", "core_clk";
 		clocks = <&clock_gcc GCC_BLSP1_AHB_CLK>,
 			 <&clock_gcc GCC_BLSP1_QUP4_I2C_APPS_CLK>;
-		//#ifdef CONFIG_VENDOR_REALME
+		//#ifdef CONFIG_PRODUCT_REALME_RMX1801
 		/*xiang.fei@PSW.MM.AudioDriver.Machine, 2017/01/26,
 		 *Delete for audio config.
 		 */
@@ -134,7 +134,7 @@
 		pinctrl-0 = <&i2c_4_active>;
 		pinctrl-1 = <&i2c_4_sleep>;
 		*/
-		//#endif /* CONFIG_VENDOR_REALME */
+		//#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 		status = "disabled";
 	};
 
@@ -181,10 +181,10 @@
 		pinctrl-names = "i2c_active", "i2c_sleep";
 		pinctrl-0 = <&i2c_6_active>;
 		pinctrl-1 = <&i2c_6_sleep>;
-		//#ifdef CONFIG_VENDOR_REALME
+		//#ifdef CONFIG_PRODUCT_REALME_RMX1801
 		/*xiang.fei@PSW.MM.AudioDriver.Machine, 2017/01/26, Delete for audio config*/
 		//status = "disabled";
-		//#endif /* CONFIG_VENDOR_REALME */
+		//#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 	};
 
 	i2c_7: i2c@c1b7000 { /* BLSP2 QUP3 */

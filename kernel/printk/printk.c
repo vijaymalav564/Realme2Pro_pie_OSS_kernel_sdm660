@@ -436,7 +436,7 @@ static int log_store(int facility, int level,
 	u32 size, pad_len;
 	u16 trunc_msg_len = 0;
 
-	#ifdef CONFIG_VENDOR_REALME 
+	#ifdef CONFIG_PRODUCT_REALME_RMX1801 
 	//part 1/2: yixue.ge 2015-04-22 add for add cpu number and current id and current comm to kmsg
     int this_cpu = smp_processor_id();
     char tbuf[64];
@@ -475,7 +475,7 @@ static int log_store(int facility, int level,
 
 	/* fill message */
 	msg = (struct printk_log *)(log_buf + log_next_idx);
-	#ifndef CONFIG_VENDOR_REALME 
+	#ifndef CONFIG_PRODUCT_REALME_RMX1801 
 	//part 2/2: yixue.ge 2015-04-22 add for add cpu number and current id and current comm to kmsg
 	memcpy(log_text(msg), text, text_len);
 	#else

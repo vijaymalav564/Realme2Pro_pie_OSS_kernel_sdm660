@@ -18,16 +18,16 @@
 #include <linux/types.h>
 #include <trace/events/power.h>
 
-#ifdef CONFIG_VENDOR_REALME
+#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //Yanzhen.Feng@PSW.AD.OppoDebug.702252, 2016/06/21, Add for Sync App and Kernel time
 #include <linux/rtc.h>
-#endif /* CONFIG_VENDOR_REALME */
-#ifdef CONFIG_VENDOR_REALME
+#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
+#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //Yunqing.Zeng@BSP.Power.Basic 2017/11/09 add for wakelock profiler
 #include <linux/kobject.h>
 #include <linux/sysfs.h>
 #include <linux/fb.h>
-#endif /* CONFIG_VENDOR_REALME */
+#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 #include "power.h"
 
 
@@ -53,10 +53,10 @@ unsigned int pm_wakeup_irq __read_mostly;
 
 /* If set and the system is suspending, terminate the suspend. */
 static bool pm_abort_suspend __read_mostly;
-#ifdef CONFIG_VENDOR_REALME
+#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //Jiemin.Zhu@PSW.AD.Performance.Power.1104067, 2016/05/12, Add for modem wake up source
 extern u16 modem_wakeup_source;
-#endif /* CONFIG_VENDOR_REALME */
+#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 
 /*
  * Combined counters of registered wakeup events and wakeup events in progress.
@@ -1187,7 +1187,7 @@ static int wakeup_sources_stats_open(struct inode *inode, struct file *file)
 	return single_open(file, wakeup_sources_stats_show, NULL);
 }
 
-#ifdef CONFIG_VENDOR_REALME
+#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //Yanzhen.Feng@PSW.AD.OppoDebug.702252, 2015/08/14, Add for Sync App and Kernel time
 static ssize_t watchdog_write(struct file *file, const char __user *buf, size_t count, loff_t *ppos)
 {
@@ -1232,7 +1232,7 @@ static ssize_t watchdog_write(struct file *file, const char __user *buf, size_t 
 
 	return count;
 }
-#endif /* CONFIG_VENDOR_REALME */
+#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 
 static const struct file_operations wakeup_sources_stats_fops = {
 	.owner = THIS_MODULE,
@@ -1240,22 +1240,22 @@ static const struct file_operations wakeup_sources_stats_fops = {
 	.read = seq_read,
 	.llseek = seq_lseek,
 	.release = single_release,
-#ifdef CONFIG_VENDOR_REALME
+#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //Yanzhen.Feng@PSW.AD.OppoDebug.702252, 2016/06/21, Add for Sync App and Kernel time
 	.write          = watchdog_write,
-#endif /* CONFIG_VENDOR_REALME */
+#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 };
 
 static int __init wakeup_sources_debugfs_init(void)
 {
-#ifndef CONFIG_VENDOR_REALME
+#ifndef CONFIG_PRODUCT_REALME_RMX1801
 //Yanzhen.Feng@PSW.AD.OppoDebug.702252, 2016/06/21,  Modify for Sync App and Kernel time
 	wakeup_sources_stats_dentry = debugfs_create_file("wakeup_sources",
 			S_IRUGO, NULL, NULL, &wakeup_sources_stats_fops);
-#else /* CONFIG_VENDOR_REALME */
+#else /* CONFIG_PRODUCT_REALME_RMX1801 */
 	wakeup_sources_stats_dentry = debugfs_create_file("wakeup_sources",
 			S_IRUGO| S_IWUGO, NULL, NULL, &wakeup_sources_stats_fops);
-#endif /* CONFIG_VENDOR_REALME */
+#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 	return 0;
 }
 

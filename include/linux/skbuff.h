@@ -3263,13 +3263,13 @@ static inline __sum16 __skb_checksum_validate_complete(struct sk_buff *skb,
 
 	skb->csum = psum;
 
-#ifndef CONFIG_VENDOR_REALME
+#ifndef CONFIG_PRODUCT_REALME_RMX1801
     //Wei.Wang@Connectivity.WiFi.Network.internet.1015237, 2017/05/30,
     //Modify for [1015237] avoid sending wrong data to app
     if (complete || skb->len <= CHECKSUM_BREAK) {
-#else /* CONFIG_VENDOR_REALME */
+#else /* CONFIG_PRODUCT_REALME_RMX1801 */
     if (complete) {
-#endif /* CONFIG_VENDOR_REALME */
+#endif /* CONFIG_PRODUCT_REALME_RMX1801 */
 		__sum16 csum;
 
 		csum = __skb_checksum_complete(skb);

@@ -885,7 +885,7 @@ static int usb_icl_vote_callback(struct votable *votable, void *data,
 	if (icl_ua > pval.intval)
 		rerun_aicl = true;
 
-#ifndef CONFIG_VENDOR_REALME
+#ifndef CONFIG_PRODUCT_REALME_RMX1801
 // wenbin.liu@BSP.CHG.Basic, 2018/01/09
 // Add for OPPO not use this
 	if (rerun_aicl) {
@@ -895,7 +895,7 @@ static int usb_icl_vote_callback(struct votable *votable, void *data,
 				POWER_SUPPLY_PROP_CURRENT_MAX,
 				&pval);
 	}
-#endif /*CONFIG_VENDOR_REALME*/
+#endif /*CONFIG_PRODUCT_REALME_RMX1801*/
 	/* set the effective ICL */
 	pval.intval = icl_ua;
 	power_supply_set_property(chip->main_psy,

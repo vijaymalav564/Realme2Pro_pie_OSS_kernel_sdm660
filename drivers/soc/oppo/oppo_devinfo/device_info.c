@@ -1,6 +1,6 @@
 /**
  * Copyright 2008-2013 OPPO Mobile Comm Corp., Ltd, All rights reserved.
- * CONFIG_VENDOR_REALME:
+ * CONFIG_PRODUCT_REALME_RMX1801:
  * FileName:devinfo.c
  * ModuleName:devinfo
  * Author: wangjc
@@ -537,7 +537,7 @@ static void mainboard_verify(struct devinfo_data *devinfo_data)
 	register_device_proc("mainboard", mainboard_info.version, mainboard_info.manufacture);	
 }
 
-//#ifdef CONFIG_VENDOR_REALME//Fanhong.Kong@ProDrv.CHG,modified 2014.4.13 for 14027
+//#ifdef CONFIG_PRODUCT_REALME_RMX1801//Fanhong.Kong@ProDrv.CHG,modified 2014.4.13 for 14027
 static void pa_verify(void)
 {
 	struct manufacture_info pa_info;
@@ -563,10 +563,10 @@ static void pa_verify(void)
 	register_device_proc("pa", pa_info.version, pa_info.manufacture);
 
 }
-//#endif /*CONFIG_VENDOR_REALME*/	
+//#endif /*CONFIG_PRODUCT_REALME_RMX1801*/	
 
 
-//#ifdef CONFIG_VENDOR_REALME
+//#ifdef CONFIG_PRODUCT_REALME_RMX1801
 //rendong.shi@BSP.boot,2016/03/24,add for mainboard resource 
 static void wlan_resource_verify(struct devinfo_data *devinfo_data)
 {
