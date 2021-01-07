@@ -958,6 +958,7 @@ retry:
 
 			ret = usb_ep_queue(ep->ep, req, GFP_ATOMIC);
 			if (unlikely(ret)) {
+				io_data->req = NULL;
 				usb_ep_free_request(ep->ep, req);
 				goto error_lock;
 			}
@@ -1140,6 +1141,9 @@ static int ffs_aio_cancel(struct kiocb *kiocb)
 
 	ENTER();
 
+	ffs_log("enter:state %d setup_state %d flag %lu", epfile->ffs->state,
+		epfile->ffs->setup_state, epfile->ffs->flags);
+
 	spin_lock_irqsave(&epfile->ffs->eps_lock, flags);
 
 	if (likely(io_data && io_data->ep && io_data->req))
@@ -1308,7 +1312,7 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 		case FUNCTIONFS_ENDPOINT_DESC:
 		{
 			int desc_idx;
-			struct usb_endpoint_descriptor *desc;
+			struct usb_endpoint_descriptor desc1, *desc;
 
 			switch (epfile->ffs->gadget->speed) {
 			case USB_SPEED_SUPER:
@@ -1320,10 +1324,12 @@ static long ffs_epfile_ioctl(struct file *file, unsigned code,
 			default:
 				desc_idx = 0;
 			}
+
 			desc = epfile->ep->descs[desc_idx];
+			memcpy(&desc1, desc, desc->bLength);
 
 			spin_unlock_irq(&epfile->ffs->eps_lock);
-			ret = copy_to_user((void *)value, desc, sizeof(*desc));
+			ret = copy_to_user((void *)value, &desc1, desc1.bLength);
 			if (ret)
 				ret = -EFAULT;
 			return ret;
@@ -1883,6 +1889,10 @@ static void ffs_data_reset(struct ffs_data *ffs)
 	ffs->state = FFS_READ_DESCRIPTORS;
 	ffs->setup_state = FFS_NO_SETUP;
 	ffs->flags = 0;
+
+	ffs->ms_os_descs_ext_prop_count = 0;
+	ffs->ms_os_descs_ext_prop_name_len = 0;
+	ffs->ms_os_descs_ext_prop_data_len = 0;
 
 	ffs_log("exit: state %d setup_state %d flag %lu", ffs->state,
 		ffs->setup_state, ffs->flags);
