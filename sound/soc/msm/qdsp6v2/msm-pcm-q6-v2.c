@@ -832,7 +832,6 @@ static int msm_pcm_playback_close(struct snd_pcm_substream *substream)
 	struct msm_audio *prtd = runtime->private_data;
 	struct msm_plat_data *pdata;
 	uint32_t timeout;
-	struct msm_plat_data *pdata = NULL;
 	int dir = 0;
 	int ret = 0;
 
