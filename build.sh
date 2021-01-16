@@ -15,8 +15,8 @@ CONFIG=RMX1801_defconfig
 CORES=$(grep -c ^processor /proc/cpuinfo)
 THREAD="-j$CORES"
 CROSS_COMPILE+="ccache "
-CROSS_COMPILE+="$PWD/aarch64-gcc-8.3/bin/aarch64-linux-gnu-"
-CROSS_COMPILE_ARM32+="$PWD/arm-gcc-8.3/bin/arm-linux-gnueabihf-"
+CROSS_COMPILE+="$PWD/tool64/bin/aarch64-linux-gnu-"
+CROSS_COMPILE_ARM32+="$PWD/tool32/bin/arm-linux-gnueabihf-"
 
 # Modules environtment
 OUTDIR="$PWD/out/"
@@ -24,7 +24,7 @@ SRCDIR="$PWD/"
 MODULEDIR="$PWD/AnyKernel3/modules/system/lib/modules/"
 PRIMA="$PWD/AnyKernel3/modules/vendor/lib/modules/wlan.ko"
 PRONTO="$PWD/AnyKernel3/modules/vendor/lib/modules/pronto/pronto_wlan.ko"
-STRIP="$PWD/aarch64-gcc-8.3/bin/$(echo "$(find "$PWD/aarch64-gcc-8.3/bin" -type f -name "aarch64-*-gcc")" | awk -F '/' '{print $NF}' |\
+STRIP="$PWD/tool64/bin/$(echo "$(find "$PWD/tool64/bin" -type f -name "aarch64-*-gcc")" | awk -F '/' '{print $NF}' |\
 			sed -e 's/gcc/strip/')"
 
 # Export
@@ -49,8 +49,8 @@ while true; do
 
 	if [ "$choice" == "1" ]; then
 		echo -e "\n(i) Cloning toolcahins if folder not exist..."
-		git clone https://gitlab.com/Vijaymalav564/aarch64-gcc-8.3.git
-                git clone https://gitlab.com/Vijaymalav564/arm-gcc8.3.git
+		git clone https://gitlab.com/Vijaymalav564/arm32-gcc-7.5.git tool32
+                git clone https://gitlab.com/Vijaymalav564/aarch64-gcc-7.5.git tool64
 		echo -e ""
 		make  O=out $CONFIG $THREAD &>/dev/null
 		make  O=out $THREAD & pid=$!
