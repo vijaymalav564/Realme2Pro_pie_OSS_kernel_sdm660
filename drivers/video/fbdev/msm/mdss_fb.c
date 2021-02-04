@@ -55,6 +55,11 @@
 #include "mdss_debug.h"
 #include "mdss_smmu.h"
 #include "mdss_mdp.h"
+#include "mdss_dsi.h"
+
+#ifdef CONFIG_KLAPSE
+#include <linux/klapse.h>
+#endif
 
 #ifdef CONFIG_PRODUCT_REALME_RMX1801
 /*
@@ -64,7 +69,6 @@
 #include <soc/oppo/oppo_project.h>
 #include <soc/oppo/boot_mode.h>
 #include <soc/oppo/mmkey_log.h>
-#include "mdss_dsi.h"
 #include <linux/completion.h>
 static int boot_mode = 0;
 /*
